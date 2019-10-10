@@ -1,0 +1,165 @@
+\documentclass[UTF8,11pt,titlepage,a4paper]{ctexart}
+%文档类说明，中英混排,11磅，标题单独成页，纸张大小a4纸
+\usepackage{amsmath}
+%宏包，支持数学公式输入
+\usepackage{hyperref}
+%支持插入超连接
+\usepackage{booktabs}
+%支持插入三线表
+\usepackage{graphics}
+%支持插入图形
+\usepackage{xcolor}
+%支持改变字体色彩
+\usepackage{amssymb}
+%加载数学字体宏包
+\usepackage{amsthm}
+%加载宏包，可以插入证明
+\usepackage{natbib}
+%支持参考文献
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=black
+}%隐藏链接边框与颜色
+\renewcommand{\theenumi}{\roman{enumi}}
+%改变有序列表编号为小写罗马数字
+\renewcommand{\labelitemi}{\S}
+%改变无序列表前的字符
+\newtheorem{theorem}{定理}[section]
+%重命名定理
+\title{\LaTeX 简易入门}
+%标题
+\date{\today}
+%日期
+\author{ 幻灭凌王\\
+	$ \dagger $ Zhengzhou University $ \dagger $}
+%作者
+\begin{document}                                      
+	%document环境 
+   \maketitle
+   	\begin{abstract}
+   	%摘要
+   	\qquad 我想写这篇文章的初衷是由于我找入门资料的时候发现，他们的资料虽然能让我入门，却不能迅速给出一个关于\LaTeX 的大概介绍。而作为一个入门者，我们更想知道的是，这个软件可以做哪些内容？这样，我们就可以根据自己的需要去选取我们想要学习的内容了。
+   	于是，我萌生了写这篇文章的想法。同时，也是实际操作一下，更好地吸收\LaTeX 的知识。当然，本篇文章并不涉及具体的知识，它只是我在\LaTeX 入门之后我对它的一个粗浅的理解。具体的入门还需要你自己去看相关的学习材料。
+   \end{abstract} 
+	\setcounter{tocdepth}{4}
+	%设定目录深度                      
+	\tableofcontents
+	%列出目录
+	\newpage
+	%手动分页
+
+
+	\part{学习资料准备}
+	\section{入门资料}
+	%章节
+	\paragraph{软件下载}\href{https://liam0205.me/texlive/
+	}{为什么你需要下Tex Live}\footnote{你或许需要下载器Free Download Manager和能够打开iso类型文件的Daemon Tools。请自行百度下载}
+    %脚注
+	\paragraph{博客}\href{https://liam0205.me/2014/09/08/latex-introduction/}{一份其实很短的 LaTeX 入门文档 | 始终}
+	\paragraph{电子书}\href{https://att.liam0205.me/attachment/LaTeX-useful-tools/LaTeX_Docs_2014.zip}{\LaTeX 从入门到放弃}\footnote{开玩笑的，就算你都看完了你也只是入门而已。}
+	\section{进阶资料}
+	\paragraph{论坛}\href{http://www.latexstudio.net/}{LaTeX科技排版工作室}
+	\paragraph{QQ群}\href{https://jq.qq.com/?_wv=1027&k=592rjA8}{万能的网友}
+	\section{说明}
+	\begin{enumerate}
+		%插入有序列表
+		\item 入门资料供入门使用，一定要仔细研读，建议先通读再略读，我就是这样学的。
+		\item 进阶资料方便我们自己去找一些模板，用以支持我们更多的想法和操作。以后可以根据自己的需要扩展。
+		\item 以上学习资料我都插入了超链接，你们直接点文字就可以跳转到相应的网页了。
+	
+	\end{enumerate}
+   \begin{table}
+   	\centering
+   	\begin{tabular}{p{80pt}p{80pt}p{80pt}}
+   		%插入三线表，设定列宽
+   		\toprule 
+   		序号&学习材料&编辑器\\
+   		\midrule
+   		1&博客&TeXwork\\
+   		2&电子书&TeXstudio\\
+   		3&QQ群&Sublime Text3\\
+   		\bottomrule                                         
+   		\caption{学习顺序} 
+   		%表格题目  
+   		                  
+   	\end{tabular}
+   \label{marker}
+   \end{table}
+   \newpage
+   \part{宏观理解}
+   \section{学习前}
+   \subsection{前言}这部分内容适合学习之前新手对LaTeX有一个大概的了解。我会站在创作者和计算机的角度来思考问题。在叙述的时候我会提一些问题，来帮助我们理解。
+   \par 
+   \subsection{创作者视角}啥？我好不容易写好的书想要发表，结果你的排版就是这样一个鬼样子？得了，我还是自己开发一个排版系统吧。嗯，要怎么开发呢？嗯，首先，我们可以利用数字，来把一些东西量化，然后取一个名称。譬如每行的间距，我们可以叫它行间距，然后用数字表示多少磅，这样，我们就可以方便地用一些参数来调整页面效果了。其次，我们的指令必须是唯一确定的。我给计算机一个指令，计算机就反馈一个固定的效果。要是我想要让计算机实现不同的效果，我就需要给计算机不同的命令。那么问题来了，我怎么给计算机命令呢？嗯，那第三点就出来了，我们怎么给计算机下达命令呢？嗯，我想我可以利用现成的语言，英语，用一个单词表示一个命令，这样，我们就可以在键盘上敲出单词来下达不同的指令了。不过这好像会引起另外一个问题。如果正文中有一个单词title。而我前面又用title命令来让计算机起标题，那么当计算机看到两个title的时候，就以为我要它取两个标题，而我又告诉它标题只能取一个，那么它一定会理解不能。所以作为命令的title要和title这个词不一样。可以用什么方便的标记来展现它们的不一样嘛。嗯，那我可以在title前面加反斜杆，这样，我们的\textbackslash title就表示让计算机起标题了，而title就只是普通的文本。然后呢，倘若我在前面把我全文的字体设为宋体，但是这里我又想把我这一小段的字体设为骚气一点的华文行楷，我该怎么做呢？哦，我明白了，当我需要给计算机派发冲突的任务的时候，我需要把我想要派发任务的对象给独立出来，让它们忽视前面的命令，只执行我新给的命令。最后，虽然我已经聪明绝顶了，但是，群众的智慧是无限的，我的程序如果想要具有生命力，不被淘汰的话，我就应该支持自定义一些命令，这样他们就相当于给我的程序免费升级了。嗯，美滋滋，计划通。
+   \par
+   \subsection{计算机视角}嗯，如你所见，我是一台计算机。今天也是元气满满的一天呢。虽然我是一台计算机，但我是一台有理想的计算机。从诗词歌赋到人生哲学，没有我不清楚的。啊，不吹了，我主人又叫我去工作了。嗯，我看看我的工作哈。嗯，首先，要我找一个文件。嗯，文件啊，我看看。emmm, 陷入深思。我那主人又要我找一个不存在的文件了。哇，没都没有，你要我怎么找啊。这种事我主人经常干，譬如使用一个没有定义过的函数啊，这种情况我估摸着准是我那主人又把函数名打错了。老是让我干这类找东西的事情，没都没有，我要怎么找啊？嗯，等一下，又有新命令了。嗯，我看看。嗨呀，又来两个矛盾的命令。嗯，那我究竟要执行哪一个？这就相当于捡了芝麻，丢了西瓜。所以我干脆两个都不执行了，就是这么任性。不过有时候也是主人没意识到我们计算机其实是按照一定的顺序来执行命令的，常常不按套路出牌。喂，不带这样的啊，你这不就相当于，让我先上大学，再上高中吗？循序渐进，ok？我跟你说，你这样搞是要出问题的。
+   嗨呀，以上，这就是计算机平凡而糟糕的一天。
+   \par 
+   \paragraph*{}注意，我上面所说的内容其实是概括了学习LaTeX过程中的几个重要概念和写代码的时候的常见错误。如果你有认真理解的话，那么我想在学习那份博客的时候你基本上是没有概念理解上的困难的。倘若你在学习那份博客的时候还是不理解，那么，你可以在看完那份博客后继续看看我下面的解释。
+   %不在目录中显示此章节
+   \par 
+   \section{学习完博客后}
+   \paragraph*{}现在，我们来看看，怎么把上面的内容把具体的知识点联系起来。我们在前面说要对计算机下达的普通命令，其实就是控制序列。控制序列以反斜杆\textbackslash 开头，而一般的文本我们可以把它称为数据，数据可以任意改变，而控制序列是不能任意改变的。一般为了便于别人理解代码，我们可以加一些简短的注释，这些注释以\% 开头。而说到环境，其实也是命令的一种，不过它相当于把特定的数据用一个盒子给装起来了，然后在这个盒子内有另一套规则，这样就可以实现不同于前文的效果而不与原先的命令相冲突了。命令和环境可以相互嵌套，但也要注意两者不能冲突。我们可以在导言区设定关于整篇文章的设置，不过有时候需要相应的宏包的支持才能做到，这时我们就需要预先加载宏包。值得注意的是，宏包这个东西其实是可以自定义的，这个自定义的范畴，当然也包括命令和环境。宏包实际上就是一个文本文件，你可以在网上下载别人的宏包，来实现各种各样的操作。注意加载宏包的时候不要打错字，电脑只会根据你打出来的单词来找文件，它发现不了你其实是打错了的。而参数这个东西，就是上面我们所说的量化，通过数字来实现精确排版。比如页边距这些我们都可以在{ }或者[ ]中设置。不过如果环境是一种把数据从原有的规则中独立出来的方法的话，那么用{ }就可以把应用的范围扩大，譬如下标默认只作用于后一个字符，你可以加{ }来扩大下标的范围。需要注意的是，有些命令需要指定对象，譬如居中命令必须要有文本才能实现，不然你居谁的中呢？而空格命令就不需要指定对象。
+   \paragraph*{}可能我这样泛泛而谈你们即使是看完了那份博客后，还是觉得有点理解不能，那你们就可以继续看看那份电子书。只要大概浏览一遍电子书就好了，然后你再来看我的观点，想必你们就应该可以理解了。而当你理解了这些重要概念之后，你再去仔细读一遍电子书，你就会发现剩下的那些不过是知识点的堆砌罢了。
+   \part{效果展示}
+   \paragraph*{}为了让你们了解学会了LaTeX后能做到什么效果，我就展示一下吧。顺便也是复习一下我学过的知识。这里，我就勉为其难用上我知道的所有技巧吧。当然，难免有装逼之嫌。但是呢，为了让你们了解LaTeX的强大，装逼这种苦差事，就交给我吧！
+   \section{数学模式}
+   \paragraph*{}我能说我当初就是冲着LaTeX是数学公式排版最好的软件而去学的吗？下面的数学模式当然要浓墨重彩地书写一笔了哈。下面全是数学公式的演示，别说话，用心去体会。
+    \paragraph{你不可不知的希腊字母}
+    \subparagraph{小写希腊字母} 来跟着我一起念。\par 
+    $ \alpha,\beta,\gamma,\delta,\epsilon,\varepsilon,\zeta,\eta,\theta,\vartheta,\iota,\kappa,\lambda,\mu,\nu,\xi,o,\pi,\varpi,\rho,\varrho,\sigma,\varsigma,\tau,\upsilon,\phi,\varphi,\chi,\psi,\omega $ 
+    \subparagraph{大写希腊字母}来继续跟我一起念。 \footnote{这里的大写希腊字母大家想必注意到了，有部分其实是重复的，不过是斜体罢了。我想说的是，有些时候我们需要斜体，有些时候我们不需要斜体，这个我也不知道什么情况下用，大家自行摸索吧。}  \par
+    $ A,B,\Gamma,\varGamma,\Delta,\varDelta,E,Z,H,\Theta,\varTheta,I,K,\Lambda,\varLambda,M,N,\Xi,\varXi,O,\Pi,\varPi,P,\Sigma,\varSigma,T,\Upsilon,\varUpsilon,\Phi,\varPhi,X,\Psi,\varPsi,\Omega,\varOmega $
+   \paragraph*{}\par 说实话，我也不知道，原来有这么多的希腊字母我都不认识，你是不是和我一样，就认识前几个了。emmm，还是先全部写出来吧。不要担心，先记着，以后会慢慢学习到的。
+   \paragraph{公式展示}
+   \[ \boxed{E=mc^2} \]
+   \[  \sum_{i=1}^{n}i \qquad \prod_{i=1}^{n}i\]
+   \[ \lim_{x\to0}\frac{\sin x}{x} \qquad \int_{0}^{\infty}\ln x dx\qquad \frac{d(\sin x)}{dx}\]
+   \subparagraph*{倘若你想要加编号的话}
+   \begin{equation}
+   %在次环境下给公式编号
+   	\begin{bmatrix}
+   	%插入矩阵
+   	x_1 & x_2 & \dots \\
+   	x_3 & x_4 & \dots \\
+   	\vdots & \vdots & \ddots
+   	\end{bmatrix}
+   	\end{equation}
+   
+   	\begin{align}
+   	a &= b+c+d \\
+   	x &= y+z
+   	\end{align}
+ \begin{equation}
+ 	y=\begin{cases}
+ 	-x,\quad x\leq 0 \\
+ 	x,\quad x>0
+ 	\end{cases}
+ \end{equation}   
+   \subparagraph*{定理及证明}
+   \begin{theorem}
+   	直角三角形两直角边的平方和等于第三边的平方
+   \end{theorem}
+   \begin{proof}[勾股定理的证明]
+   	略。既然大家都学过，我就走个过场吧。
+   \end{proof}
+    \paragraph*{小结}
+    一般来说只要掌握积分，微分，导数，矩阵，向量，极限，分数，函数，方程组，以及部分希腊字母就好了。其他的符号，倘若你有需要，请自行学习。在此不做赘述。学习顺序忘了的请看第 \pageref*{marker} 页的表格 \\
+    \section{其他}
+    \paragraph*{说明}个人觉得\LaTeX 的效果可以大致分为两类，数学公式与其他。数学公式是重点，其他的，只是锦上添花罢了。下面就勉为其难展示一下其他方面的内容吧。
+    \begin{itemize}
+    	\item 骚气的字体演示： \[ \mathfrak{Can\quad you \quad understand \quad it?} \]
+        \item 颜色改变:  \qquad \qquad \qquad  \textcolor[RGB]{255,0,0}{我是红色}
+        %改变字体颜色为红色
+        \item 插入图片
+        \begin{figure}[htbp]
+        	%插入图片
+        	\centering
+        	\includegraphics{hui.jpg}
+        	\caption{谢谢观赏}
+        	\label{fig:myphoto}
+        	\end{figure}
+    \end{itemize}
+    
+\end{document}
