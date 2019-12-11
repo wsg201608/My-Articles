@@ -1,0 +1,74 @@
+\documentclass[UTF8,11pt,titlepage,a4paper]{ctexart}
+%必需项：文档类说明，一般ctexart即可，不一般的时候看你需要选择，[]里的是可选项，UTF8表示中英混排,11磅，标题单独成页，纸张大小a4纸。若不设置则为默认值
+
+
+%以下是导言区，可引入宏包，进行一些个性化定制，以及写标题内容。
+%以下为可选项，其中amsmath宏包最常用，其他宏包看需要，常见宏包TeXlive自带，不常见宏包需下载
+\usepackage{amsmath}
+%使用宏包，支持数学公式输入
+\usepackage{hyperref}
+%支持插入超连接
+\usepackage{booktabs}
+%支持插入三线表
+\usepackage{graphics}
+%支持插入图形
+\usepackage{xcolor}
+%支持改变字体色彩
+\usepackage{amssymb}
+%加载数学字体宏包
+\usepackage{amsthm}
+%加载宏包，可以插入证明
+
+
+
+%下面是一些个性化定制
+\renewcommand{\theenumi}{\roman{enumi}}
+%改变有序列表编号为小写罗马数字
+\renewcommand{\labelitemi}{\S}
+%改变无序列表前的字符
+\newtheorem{theorem}{定理}[section]
+%重命名定理
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	citecolor=black
+}
+%隐藏链接边框与颜色,设定引用为黑色
+
+
+%以下是标题区
+\title{这里是标题}
+%标题
+\date{\today}
+%日期设为当日
+\author{ 幻灭凌王\\ 
+	$ \dagger $ Zhengzhou University $ \dagger $}
+%作者及学校，\\是换行命令，注意区分\par分段命令与换行命令\\
+%导言区结束
+
+
+%以下是正文
+\begin{document}                                      
+	%document环境，必需项，所有想在正文中显示的必须放在document环境，标题区比较特殊，先写在导言区然后用\maketitle命令引入
+   \maketitle
+   %这里会显示标题信息
+   	\begin{abstract}
+   	%摘要
+   	这里是摘要文字
+   \end{abstract} 
+	\setcounter{tocdepth}{4}
+	%设定目录深度                      
+	\tableofcontents
+	%列出目录
+	\newpage
+	%手动分页
+\part{这里是part}
+\section{这里是section}
+\subsubsection{这里是subsection}
+\paragraph{这里是paragraph标题}这里是文字内容，这里是引用 \cite{AndersonMore}
+%cite命令表示引用参考文献
+\bibliographystyle{plain}
+%引入参考文献格式
+\bibliography{reference}
+%引入的bib格式参考文献
+\end{document}
